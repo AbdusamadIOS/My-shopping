@@ -26,13 +26,30 @@ class CategoryVC: UIViewController {
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+           setupColView()
+            cellsiz()
+    }
+    
+    func setupColView() {
         collectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
         collectionView.dataSource = self
         collectionView.delegate = self
+        cellsiz()
     }
-
-
+    
+    func cellsiz() {
+        let width = ((collectionView.frame.width - 100) / 3)
+        let cellSize = CGSize(width: width , height: 140)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical //.horizontal
+        layout.itemSize = cellSize
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 20
+        collectionView.setCollectionViewLayout(layout, animated: true)
+    }
 }
 
 extension CategoryVC: UICollectionViewDelegate , UICollectionViewDataSource {

@@ -43,7 +43,21 @@ class MenuVC: UIViewController {
         EditPhoto()
         setupColView()
         filtered = malumotlar
+        cellsiz()
         
+    }
+    
+    func cellsiz() {
+        let width = ((collectionView.frame.width - 80) / 2)
+        let cellSize = CGSize(width: width , height: 250)
+
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical //.horizontal
+        layout.itemSize = cellSize
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 20
+        collectionView.setCollectionViewLayout(layout, animated: true)
     }
     func EditPhoto() {
         image.layer.borderColor = UIColor.blue.cgColor
@@ -117,6 +131,7 @@ extension MenuVC: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.image.image = filtered[indexPath.item].image
         cell.modelLbl.text = filtered[indexPath.item].modeli
         cell.narxLbl.text = "$\(filtered[indexPath.item].narxi)"
+        
         return cell
     }
     
@@ -130,8 +145,10 @@ extension MenuVC: UICollectionViewDataSource, UICollectionViewDelegate {
         
         present(seeProduct, animated: true)
     }
-    
 }
+   
+    
+
 
 // MARK: SearchBar Delegate
 
